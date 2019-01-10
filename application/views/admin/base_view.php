@@ -4,7 +4,7 @@ $user_detail = $this->session->userdata('user_data_session');
 $name = $user_detail['username'];
 if($content == 'dashboard') {$this->load->view('admin/home'); $selected = $content;$content='';}
 if($content == 'modules') {$this->load->view('category/show_student_id'); $selected = $content;$content='';}
-if($content == 'users') {$this->load->view('admin/users'); $selected = $content;$content='';}
+if($content == 'Product') {$this->load->view('product/show_product_id'); $selected = $content;$content='';}
 if($content == 'blank_page1') {$this->load->view('admin/blank_page1'); $selected = $content;$content='';}
 if($content == 'blank_page2') {$this->load->view('admin/blank_page2'); $selected = $content;$content='';}
 if($content == 'settings') {$this->load->view('admin/settings'); $selected = $content;$content='';}
@@ -94,7 +94,7 @@ if($content == 'profile') {$this->load->view('admin/profile'); $selected = $cont
                 if ($selected == 'users') 	echo '<li class="active" >';
                 else echo '<li>';
                 ?>
-                <a href="<?php echo base_url(); ?>users"><i class="fa fa-fw fa-edit"></i> Users</a>
+                <a href="<?php echo base_url(); ?>product/show_product_id"><i class="glyphicon glyphicon-shopping-cart"></i> Product</a>
                 </li>
                 <?php
                 if ($selected == 'blank_page1' || $selected == 'blank_page2') 	echo '<li class="active" >';
@@ -116,8 +116,7 @@ if($content == 'profile') {$this->load->view('admin/profile'); $selected = $cont
     </nav>
 
     <div id="foo-bottom">
-        <a href="http://ExplicitPHP.blogspot.com" id="txt-standard">
-            2016 ExplicitPHP. PHP is Easy.
+            2019 ExplicitPHP. PHP is Easy.
         </a>
     </div>
 

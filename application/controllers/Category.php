@@ -30,12 +30,13 @@ class Category extends CI_Controller
               print_r($_FILES);
               die; */
             $data["name"] = $this->input->post("name");  //get image name
-            $info = pathinfo($_FILES['image']['name']);
-            $ext = $info['extension']; // get the extension of the file
-            $img_path = 'images/categories/' . time() . '.' . $ext;
-            $data["image"] = basename($img_path);//get name image
+
             $this->form_validation->set_rules("name", "Name", "required|min_length[3]");
             if ($this->form_validation->run() == true) {
+                $info = pathinfo($_FILES['image']['name']);
+                $ext = $info['extension']; // get the extension of the file
+                $img_path = 'images/categories/' . time() . '.' . $ext;
+                $data["image"] = basename($img_path);//get name image
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $img_path)) {
                     if ($this->db->insert("category", $data)) {
                         redirect('category/show_category_id');
@@ -48,43 +49,8 @@ class Category extends CI_Controller
                     print_r("false upload");
                     die;
                 }
-            } else {
-                echo "<pre>";
-                print_r("false validation");
-                die;
             }
 
-
-            /* Khi mày dùng thư viện nhưng nó bị lỗi :)
-            if(!empty($FILES['image']['name'])){
-                   $config['upload_path'] = './images/categories/';
-                   $config['allowed_types'] = 'jpg|jpeg|png|gif';
-                   $config['file_name'] = $_FILES['image']['name'];
-                   $config['max_size']             = 500000;
-                   $config['max_width']            = 3000;
-                   $config['max_height']           = 3000;
-
-                   $this->load->library('upload',$config);
-                   $this->upload->initialize($config);
-                   if(!$this->upload->do_upload('image')){
-                       $error = array('error' => $this->upload->display_errors());
-                       $this->load->view('category/add', $error);
-
-                   }else{
-                       $data = array('upload_data' =>$this->upload->data());
-                       $this->load->view('category/add',$data);
-                      // $uploadData=$this->upload->data();
-                     //  $data["image"] = $uploadData['file_name'];
-                   }
-               }
-            /*  echo "<pre>";
-               print_r($_FILES);
-               die; */
-            /* $this->form_validation->set_rules("name","Name",'required|min_length[3]');
-           if($this->form_validation->run()==true){
-               $this->db->insert("category",$data);
-               redirect('category/index');
-           } */
         }
         $this->load->view('category/add');
     }

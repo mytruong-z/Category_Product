@@ -53,7 +53,7 @@
         echo '<p class="statusMsg">'.$error_msg.'</p>';
     }
     ?>
-    <form class="form_login" action="http://localhost/Product/Login/login_auth" method="post">
+    <form class="form_login" action="http://localhost/Category_Product/Login/login_auth" method="post">
         <h2 style="text-align: center">Admin</h2>
         <img id="profile-img" class="profile-img-card" src="<?php echo base_url();?>assets4/image/avatar_2x.png" />
 

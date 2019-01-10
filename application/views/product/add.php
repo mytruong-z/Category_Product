@@ -38,15 +38,35 @@
     input[type=submit]:hover {
         background-color: #45a049;
     }
+    td{
+    }
 </style>
 <body>
 <div class="container">
-    <h2>Add Category</h2>
+    <h2>Add Product</h2>
+    <?php
+    if(!empty($success_msg)){
+        echo '<p class="statusMsg">'.$success_msg.'</p>';
+    }elseif(!empty($error_msg)){
+        echo '<p class="statusMsg">'.$error_msg.'</p>';
+    }
+    ?>
     <form action="add" method="post" enctype="multipart/form-data">
         <table>
             <tr>
                 <td></td>
                 <td><span style="color: red;"><?php echo validation_errors(); ?></span></td>
+            </tr>
+            <tr>
+                <td>Cat_id</td>
+                <td>
+                    <select name="category_id">
+                    <option value="1">Audi</option>
+                    <option value="2">Mazda</option>
+                    <option value="3">Mercedes</option>
+                    <option value="4">BMW</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>Name</td>
@@ -55,13 +75,21 @@
 
             </tr>
             <tr>
+                <td>Price</td>
+                <td><input type="text" name="price">
+                </td>
+
+            </tr>
+            <tr>
                 <td>Image</td>
                 <td><input type="file" name="image">
                 </td>
+
+
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" name="btnadd" value="Add"></td>
+                <td><input type="submit" name="btnaddP" value="Add"></td>
             </tr>
         </table>
     </form>

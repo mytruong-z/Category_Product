@@ -37,6 +37,12 @@
 
 <body>
 <div class="container">
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="<?=base_url()?>Home/index">Home</a>
+        </div>
+    </nav>
+
     <div>
         <h2 style="text-align: center">Category</h2>
     </div>
@@ -46,7 +52,7 @@
 
     <table class="table" border="0">
         <tr class="danger">
-            <td class="bold">Id</td>
+            <td class="bold" id="hide">Id</td>
             <td class="bold">Name</td>
             <td class="bold">Picture</td>
             <td class="bold">Action</td>
@@ -55,9 +61,9 @@
         </tr>
         <?php foreach ($category as $value) {?>
             <tr>
-                <td><?php echo $value["id"];?></td>
+                <td id="hide"><?php echo $value["id"];?></td>
                 <td><?php echo $value["name"];?></td>
-                <td><img src="<?=base_url()?>images/categories/<?php echo $value['image'];?>" class="img-thumbnail" alt="Cinque Terre" width="200px" height="200px" ></td>
+                <td><img src="<?=base_url()?>images/categories/<?php echo $value['image'];?>" class="img-thumbnail" alt="Cinque Terre" width="100px" height="100px" ></td>
                 <td>
                <a href="<?php echo base_url() . "category/show_category_id/" . $value["id"]; ?>"><button class="btn-primary" data-toggle="modal" data-target="#myModal" >Edit</button></a>
                     <a href="<?=base_url()?>category/delete_category/<?php echo $value["id"];?>""><button class="btn-danger">Delete</button></a>

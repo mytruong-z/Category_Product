@@ -1,7 +1,74 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: apple
- * Date: 1/10/19
- * Time: 11:24 AM
- */
+defined('BASEPATH') OR exit('No direct script access allowed');
+class Product extends CI_Controller{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->database();
+        $this->load->library(array('upload','form_validation','session'));
+        $this->load->model("product_model");
+        $this->load->helper(array('file','url','form'));
+        if(!$this->session->userdata('logged_in')){
+            redirect('login','refresh');
+        }
+    }
+    public function show_product_id(){
+        $id = $this->uri->segment(3);
+        $data['product'] = $this->product_model->getList();
+        $data['single_product'] = $this->product_model->show_product_id($id);
+        $data['content'] = 'modules';
+        $this->load->view('product/index',$data);
+    }
+    public function add(){
+        if($this->input->post("btnaddP")){
+            $data['name'] = $this->input->post('name');
+            $data['category_id'] = $this->input->post('category_id');
+            $data['price']=$this->input->post('price');
+            $this->form_validation->set_rules('name','Name Product','required|min_length[3]');
+            $this->form_validation->set_rules('price','Price','required|numeric');
+            $this->form_validation->set_rules('category_id','Category_id','required|numeric');
+            if($this->form_validation->run()==true){
+                $info = pathinfo($_FILES['image']['name']);
+                $ext = $info['extension'];
+                $img_path = '/Applications/XAMPP/htdocs/Category_Product/images/products/'.time().'.'.$ext;
+                $data['image'] = basename($img_path);
+                if(move_uploaded_file($_FILES['image']['tmp_name'],$img_path)){
+                    if($this->db->insert('product',$data)){
+                        redirect('product/show_product_id');
+                    }
+                    print_r($img_path);
+                    die;
+                }else{
+                    print_r('false upload');
+                    die;
+                }
+            }
+        }
+        $this->load->view('product/add');
+    }
+    public function update_product_id(){
+        $id = $this->input->post('id');
+        $image_now = $this->input->post('name_image');
+        if($this->input->post('dsubmit')){
+            $data['name'] = $this->input->post('name');
+            $data['category_id'] = $this->input->post('category_id');
+            $data['price'] = $this->input->post('price');
+            if(isset($_FILES['image']['tmp_name'])&& !empty($_FILES['image']['tmp_name'])){
+                $info = pathinfo($_FILES['image']['name']);
+                $ext = $info['extension'];
+                $image_save1 = 'images/products/'.time().'.'.$ext;
+                unlink('images/products/'.$image_now);
+                move_uploaded_file($_FILES['image']['tmp_name'],$image_save1);
+                $image_save  = basename($image_save1);
+                $data['image'] = $image_save;
+            }
+            $this->product_model->update_product_id($id,$data);
+            redirect('product/show_product_id');
+        }
+    }
+    public function delete_product($id){
+        $this->db->where("id",$id);
+        $this->db->delete('product');
+        redirect('product/show_product_id');
+    }
+}

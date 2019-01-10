@@ -39,7 +39,7 @@ class Login extends CI_Controller{
 
                 $data_to_view['selected'] = 'dashboard';
                 $data_to_view['content'] = 'dashboard';
-                $this->load->view('admin/base_view',$data_to_view);
+               $this->load->view('admin/base_view',$data_to_view);
 
             }else{
              /*  $this->session->set_flashdata('login_msg', '<div class="alert alert-danger text-center">Login Failed!! Please try again.</div>');
