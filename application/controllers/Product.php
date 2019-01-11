@@ -20,6 +20,7 @@ class Product extends CI_Controller{
         $this->load->view('product/index',$data);
     }
     public function add(){
+        $data2['category'] = $this->product_model->getCategory();
         if($this->input->post("btnaddP")){
             $data['name'] = $this->input->post('name');
             $data['category_id'] = $this->input->post('category_id');
@@ -44,7 +45,7 @@ class Product extends CI_Controller{
                 }
             }
         }
-        $this->load->view('product/add');
+        $this->load->view('product/add',$data2);
     }
     public function update_product_id(){
         $id = $this->input->post('id');

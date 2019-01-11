@@ -1,6 +1,7 @@
 <?php
 class Product_model extends CI_Model{
     protected $tbl_product = 'product';
+    protected $tbl_category = 'category';
     public function getList(){
         return $this->db->select('*')->from($this->tbl_product)->get()->result_array();
     }
@@ -15,5 +16,8 @@ class Product_model extends CI_Model{
     public function update_product_id($id,$data){
         $this->db->where('id',$id);
         $this->db->update('product',$data);
+    }
+    public function getCategory(){
+        return $this->db->select('*')->from($this->tbl_category)->get()->result_array();
     }
 }

@@ -34,16 +34,28 @@
         border-radius: 4px;
         cursor: pointer;
         margin-top: 20px;
+        margin-right: 30px;
+    }
+    .cancel{
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        float: left;
     }
     input[type=submit]:hover {
         background-color: #45a049;
     }
-    td{
+    .div-cancel{
+        margin: auto;
     }
 </style>
+
 <body>
+<div class="div-cancel"><a href="<?=base_url()?>product/show_product_id"><button class="btn-default cancel">Cancel</button></a></div>
+
 <div class="container">
-    <h2>Add Product</h2>
+    <div style="text-align: center"><h2>Add Product</h2></div>
     <?php
     if(!empty($success_msg)){
         echo '<p class="statusMsg">'.$success_msg.'</p>';
@@ -59,14 +71,15 @@
             </tr>
             <tr>
                 <td>Cat_id</td>
+
                 <td>
                     <select name="category_id">
-                    <option value="1">Audi</option>
-                    <option value="2">Mazda</option>
-                    <option value="3">Mercedes</option>
-                    <option value="4">BMW</option>
+                        <?php foreach ($category as $value) { ?>
+                    <option value="<?php  echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+                        <?php } ?>
                     </select>
                 </td>
+
             </tr>
             <tr>
                 <td>Name</td>

@@ -38,10 +38,31 @@
     input[type=submit]:hover {
         background-color: #45a049;
     }
+    .cancel{
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        float: left;
+    }
+    #mySidenav a {
+        position: absolute;
+        left: -80px;
+        transition: 0.3s;
+        padding: 15px;
+        width: 100px;
+        text-decoration: none;
+        font-size: 20px;
+        color: white;
+        border-radius: 0 5px 5px 0;
+    }
 </style>
 <body>
+<div class="div-cancel"><a href="<?=base_url()?>category/show_category_id"><button class="btn-default cancel">Cancel</button></a></div>
+
 <div class="container">
-    <h2>Add Category</h2>
+
+    <div style="text-align: center"><h2>Add Category</h2></div>
     <form action="add" method="post" enctype="multipart/form-data">
         <table>
             <tr>
