@@ -55,12 +55,6 @@ class Category extends CI_Controller
         $this->load->view('category/add');
     }
 
-    public function delete_category($id)
-    {
-        $this->db->where("id", $id);
-        $this->db->delete('category');
-        redirect("category/show_category_id");
-    }
 
     public function show_category_id()
     {
@@ -95,4 +89,15 @@ class Category extends CI_Controller
         }
 
     }
+    public function delete_category($id)
+    {
+        $image = $this->db->get_where('category',array('id'=> $id))->row()->image;
+       /* print_r($image);
+        die; */
+        $this->db->where("id", $id);
+        $this->db->delete('category');
+        unlink('images/categories/'.$image);
+        redirect("category/show_category_id");
+    }
+
 }

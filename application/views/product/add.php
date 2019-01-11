@@ -46,14 +46,35 @@
     input[type=submit]:hover {
         background-color: #45a049;
     }
-    .div-cancel{
-        margin: auto;
+    #mySidenav a {
+        position: absolute;
+        left: -80px;
+        transition: 0.3s;
+        padding: 10px;
+        width: 100px;
+        text-decoration: none;
+        font-size: 20px;
+        color: white;
+        border-radius: 0 5px 5px 0;
     }
+
+    #mySidenav a:hover {
+        left: 0;
+    }
+
+    #cancel {
+        top: 0px;
+        background-color: #a61717;
+    }
+
+
 </style>
 
 <body>
-<div class="div-cancel"><a href="<?=base_url()?>product/show_product_id"><button class="btn-default cancel">Cancel</button></a></div>
+<div id="mySidenav" class="sidenav">
+    <a id="cancel" href="<?=base_url()?>product/show_product_id">Cancel</a>
 
+</div>
 <div class="container">
     <div style="text-align: center"><h2>Add Product</h2></div>
     <?php

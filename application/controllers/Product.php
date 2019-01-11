@@ -68,8 +68,12 @@ class Product extends CI_Controller{
         }
     }
     public function delete_product($id){
+        $image = $this->db->get_where('product',array('id'=> $id))->row()->image;
+       /* print_r($image);
+        die; */
         $this->db->where("id",$id);
         $this->db->delete('product');
+        unlink('images/products/'.$image);
         redirect('product/show_product_id');
     }
 }
