@@ -12,6 +12,7 @@
 <style>
     .container{
         width: 80%;
+        margin-top: 100px;
     }
     .bold{
         font-weight: bold;
@@ -30,21 +31,87 @@
         background-color: #d58512;
         color: white;
     }
+    .form-but {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 10px;
+        resize: vertical;
+    }
+    input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    #detail{
+        width: 30%;
+    }
+    .border-form{
+        border-style: dashed;
+        border-width: 5px;
+        border-color: #2cc36b;
+        padding: 15px;
+    }
+    .glyphicon-remove{
+        float: right;
+        color: #a61717;
+        z-index: 1;
+        font-size: xx-large;
+    }
+    .h2_style{
+        color: white;
+        text-align: center;
+        margin-top: 10px;
+    }
 </style>
-
-
 <body>
 <div class="container">
-    <nav class="navbar navbar-inverse">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="<?=base_url()?>Home/index">Home</a>
-        </div>
+    <div><nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="<?=base_url()?>Home/index">Home</a>
+            </div>
+            <div><h2 style="text-align: center" class="h2_style">Products</h2></div>
+        </nav>
+    </div>
 
-    </nav>
+    <div id="detail">
+        <!-- Fetching All Details of Selected Student From Database And Showing In a Form -->
+        <?php foreach ($single_product as $prod) {?>
+            <form method="post" class="border-form" action="<?php echo base_url() . "product/update_product_id"?>" enctype="multipart/form-data">
+                <a id="cancel"  class="cancel" href="<?php echo base_url()."product/show_product_id"?>"><span  class="glyphicon glyphicon-remove"></span></a>
 
+                <div class="form-group"><label id="hide">Id :</label>
+                    <input type="text" class="form-but" id="hide" name="id" value="<?php echo $prod->id; ?>">
+                </div>
+                <div class="form-group">
+                    <label>Category_id :</label>
+                    <input type="text" class="form-but" name="category_id" value="<?php echo $prod->category_id; ?>">
+                </div>
+                <div class="form-group">
+                    <label>Name :</label>
+                    <input type="text" class="form-but" name="name" value="<?php echo $prod->name; ?>">
+                </div>
+                <div class="form-group">
+                    <label>Price :</label>
+                    <input type="text" class="form-but" name="price" value="<?php echo $prod->price; ?>">
+                </div>
 
-    <div>
-        <h2 style="text-align: center">Product</h2>
+                <div class="form-group">
+                    <label>Image :</label>
+                    <input type="file" name="image" value="<?php echo $prod->image; ?>">
+                    <input  id="hide" type="text" name="name_image" value="<?php echo $prod->image; ?>">
+                    <p><img src="<?=base_url()?>images/products/<?php echo $prod->image;?>" class="img-thumbnail" alt="Cinque Terre" width="100px" height="100px" >
+                    </p>
+                </div>
+                <input class="editbtn" type="submit" id="submit" name="dsubmit" value="Update">
+            </form>
+        <?php } ?>
     </div>
     <div id="add">
         <a class="bold" href = "<?=base_url()?>product/add"><button class="add btn-success">Add Product</button></a>
@@ -58,8 +125,6 @@
             <td class="bold">Price</td>
             <td class="bold">Image</td>
             <td class="bold">Action</td>
-
-
         </tr>
         <?php foreach ($product as $value) {?>
             <tr>
@@ -75,38 +140,6 @@
             </tr>
         <?php } ?>
     </table>
-    <!-- Modal -->
-    <div id="detail">
-        <!-- Fetching All Details of Selected Student From Database And Showing In a Form -->
-        <?php foreach ($single_product as $prod) {?>
-            <form method="post" action="<?php echo base_url() . "product/update_product_id"?>" enctype="multipart/form-data">
-                <div><label id="hide">Id :</label>
-                    <input type="text" id="hide" name="id" value="<?php echo $prod->id; ?>">
-                </div>
-                <div>
-                    <label>Category_id :</label>
-                    <input type="text" name="category_id" value="<?php echo $prod->category_id; ?>">
-                </div>
-                <div>
-                    <label>Name :</label>
-                    <input type="text" name="name" value="<?php echo $prod->name; ?>">
-                </div>
-                <div>
-                    <label>Price :</label>
-                    <input type="text" name="price" value="<?php echo $prod->price; ?>">
-                </div>
-
-                <div>
-                    <label>Image :</label>
-                    <input type="file" name="image" value="<?php echo $prod->image; ?>">
-                    <input  id="hide" type="text" name="name_image" value="<?php echo $prod->image; ?>">
-                    <p><img src="<?=base_url()?>images/products/<?php echo $prod->image;?>" class="img-thumbnail" alt="Cinque Terre" width="100px" height="100px" >
-                    </p>
-                </div>
-                <input class="editbtn" type="submit" id="submit" name="dsubmit" value="Update">
-            </form>
-        <?php } ?>
-    </div>
 </div>
 </body>
 </html>
