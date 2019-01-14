@@ -35,7 +35,7 @@ class Category extends CI_Controller
             if ($this->form_validation->run() == true) {
                 $info = pathinfo($_FILES['image']['name']);
                 $ext = $info['extension']; // get the extension of the file
-                $img_path = 'images/categories/' . time() . '.' . $ext;
+                $img_path = 'Applications/XAMPP/htdocs/Category_Product/images/categories/' . time() . '.' . $ext;
                 $data["image"] = basename($img_path);//get name image
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $img_path)) {
                     if ($this->db->insert("category", $data)) {

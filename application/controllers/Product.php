@@ -57,7 +57,7 @@ class Product extends CI_Controller{
             if(isset($_FILES['image']['tmp_name'])&& !empty($_FILES['image']['tmp_name'])){
                 $info = pathinfo($_FILES['image']['name']);
                 $ext = $info['extension'];
-                $image_save1 = 'images/products/'.time().'.'.$ext;
+                $image_save1 = ' /Applications/XAMPP/htdocs/Category_Product/images/products/'.time().'.'.$ext;
                 unlink('images/products/'.$image_now);
                 move_uploaded_file($_FILES['image']['tmp_name'],$image_save1);
                 $image_save  = basename($image_save1);
